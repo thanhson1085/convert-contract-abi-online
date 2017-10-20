@@ -2,7 +2,7 @@
   <div id="app">
     <md-whiteframe>
       <md-toolbar md-theme="blue">
-        <span class="md-title">Convert Ethereum Contract ABI Online</span>
+        <span class="md-title">Ethereum Contract ABI Converter</span>
       </md-toolbar>
     </md-whiteframe>
 
@@ -28,12 +28,24 @@
           <md-button class="md-raised md-primary" @click="addComponent()"><md-icon>add</md-icon> Add Parameter</md-button>
           <md-button class="md-raised md-accent" @click="generateAbi()">Generate ABI</md-button>
           <md-input-container>
-          <label>ABI Output</label>
+          <label>ABI-Encoded Output</label>
           <md-textarea id="output" v-model="encoded"></md-textarea>
           </md-input-container>
           <md-button class="md-raised" v-clipboard:copy="encoded"  v-clipboard:success="onCopy"><md-icon>content_copy</md-icon> {{copy}}</md-button>
         </div>
       </form>
+    </div>
+    <div class="footer">
+      <!-- Place this tag where you want the button to render. -->
+      <div>
+        <br />
+        <span class="md-caption">Donations are always appreciated! <br />
+          ETH: 0x019463d7ACB16f9fD8ad17537d413Ef061e8d043</span>
+      <br />
+      <br />
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/thanhson1085/covert-contract-abi-online" data-icon="octicon-star" aria-label="Star thanhson1085/covert-contract-abi-online on GitHub">Star</a>
+    </div>
     </div>
   </div>
 </template>
@@ -89,7 +101,8 @@ export default {
 </script>
 
 <style>
-  .page-layout {
+  .page-layout, .footer {
+    padding-top: 30px;
     margin: 16px 15%;
     display: flex;
   }
