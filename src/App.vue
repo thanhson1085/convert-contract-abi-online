@@ -7,15 +7,32 @@
     </md-whiteframe>
 
     <div class="page-layout">
-      <form novalidate @submit.stop.prevent="submit">
-        <md-input-container>
-          <label>Contract Parameters</label>
-          <md-input v-model="parameters" placeholder="Type your contract parameters"></md-input>
-        </md-input-container>
-        <md-input-container>
-        <label>Textarea</label>
-        <md-textarea maxlength="70" v-model="encoded"></md-textarea>
-        </md-input-container>
+      <form novalidate @submit.prevent="">
+        <div class="field-group">
+          <md-layout md-gutter v-for="p in components">
+            <md-layout md-flex="30">
+              <md-input-container>
+              <label for="country">Parameter Type</label>
+              <md-select name="parameterType" id="parameterType" v-model="p.type">
+              <md-option v-for="(value, key) in parameterTypes" :value="key" :key="key">{{value}}</md-option>
+              </md-select>
+              </md-input-container>
+            </md-layout>
+            <md-layout>
+              <md-input-container>
+                <label>Parameter Value</label>
+                <md-input v-model="p.value" placeholder="Parameter Value"></md-input>
+              </md-input-container>
+            </md-layout>
+          </md-layout>
+          <md-button class="md-raised md-primary" @click="addComponent()"><md-icon>add</md-icon> Add Parameter</md-button>
+          <md-button class="md-raised md-accent" @click="generateAbi()">Generate ABI</md-button>
+          <md-input-container>
+          <label>ABI Output</label>
+          <md-textarea id="output" v-model="encoded"></md-textarea>
+          </md-input-container>
+          <md-button class="md-raised" v-clipboard:copy="encoded"  v-clipboard:success="onCopy"><md-icon>content_copy</md-icon> {{copy}}</md-button>
+        </div>
       </form>
     </div>
   </div>
@@ -25,33 +42,47 @@
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
+import VueClipboard from 'vue-clipboard2'
 
 import abi from 'ethereumjs-abi'
 
-var parameterTypes = [
-    'string',
-    'string',
-    'uint256',
-    'string'
-]
-var parameterValues = [
-    'Test Token',
-    'TST',
-    '18',
-    '1.0'
-]
-
-var encoded = abi.rawEncode(parameterTypes, parameterValues)
 
 Vue.use(VueMaterial)
+Vue.use(VueClipboard)
+var parameterTypes = {
+  'string': 'String',
+  'address': 'Address',
+  'uint': 'Uint',
+  'uint256': 'Uint256'
+}
 
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      encoded: encoded.toString('hex'),
-      parameters: ''
+      encoded: '',
+      parameter: '',
+      components: [{type: 'string', value: ''}],
+      parameterType: 'string',
+      parameterTypes: parameterTypes,
+      copy: 'Copy'
+    }
+  },
+  methods: {
+    addComponent() {
+      this.components.push({type: 'string', value: ''})
+    },
+    onCopy() {
+      this.copy = 'Copied'
+      setTimeout(() => {
+        this.copy = 'Copy'
+      }, 3000)
+    },
+    generateAbi() {
+      var types = this.components.filter(c => c.value).map(c => c.type)
+      var values = this.components.map(c => c.value).filter(v => v)
+      this.encoded = abi.rawEncode(types, values).toString('hex')
     }
   }
 }
@@ -64,5 +95,8 @@ export default {
   }
   form {
     width: 100%;
+  }
+  #output {
+    min-height: 80px;
   }
 </style>
