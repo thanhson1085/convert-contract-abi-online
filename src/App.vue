@@ -103,8 +103,9 @@ export default {
 <style>
   .page-layout, .footer {
     padding-top: 30px;
-    margin: 16px 15%;
     display: flex;
+    margin: 16px auto;
+    max-width: 600px;
   }
   form {
     width: 100%;
