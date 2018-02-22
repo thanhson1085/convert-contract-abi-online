@@ -21,7 +21,7 @@
             <md-layout>
               <md-input-container>
                 <label>Parameter Value</label>
-                <md-input v-model="p.value" placeholder="Parameter Value"></md-input>
+                <md-input v-model="p.value" placeholder="Parameter Value - If array, split by (,)"></md-input>
               </md-input-container>
             </md-layout>
           </md-layout>
