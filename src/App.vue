@@ -66,7 +66,10 @@ var parameterTypes = {
   'address': 'Address',
   'address[]': 'Address[]',
   'uint': 'Uint',
-  'uint256': 'Uint256'
+  'uint[]': 'Uint[]',
+  'uint256': 'Uint256',
+  'uint256[]': 'Uint256[]',
+  'bytes': 'Bytes'
 }
 
 export default {
@@ -95,6 +98,11 @@ export default {
     generateAbi() {
       var types = this.components.filter(c => c.value).map(c => c.type)
       var values = this.components.map(c => c.value).filter(v => v)
+      for (let i = 0; i <= values.length - 1; i++) {
+        if (types[i].indexOf('[]') >= 0) {
+          values[i] = values[i].split(',').map(v => v.trim());
+        }
+      }
       this.encoded = abi.rawEncode(types, values).toString('hex')
     }
   }
