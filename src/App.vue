@@ -64,6 +64,7 @@ Vue.use(VueClipboard)
 var parameterTypes = {
   'string': 'String',
   'address': 'Address',
+  'address[]': 'Address[]',
   'uint': 'Uint',
   'uint256': 'Uint256'
 }
