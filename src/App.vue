@@ -44,7 +44,7 @@
       <br />
       <br />
       <!-- Place this tag where you want the button to render. -->
-      <a class="github-button" href="https://github.com/thanhson1085/covert-contract-abi-online" data-icon="octicon-star" aria-label="Star thanhson1085/covert-contract-abi-online on GitHub">Star</a>
+      <a class="github-button" href="https://github.com/thanhson1085/convert-contract-abi-online" data-icon="octicon-star" aria-label="Star thanhson1085/convert-contract-abi-online on GitHub">Star</a>
     </div>
     </div>
   </div>
