@@ -40,7 +40,7 @@
       <div>
         <br />
         <span class="md-caption">Donations are always appreciated! <br />
-          ETH: 0x019463d7ACB16f9fD8ad17537d413Ef061e8d043</span>
+          ETH: 0xae14B4dEa6525Ff9017BAF32f01fd11372DEa7A0</span>
       <br />
       <br />
       <!-- Place this tag where you want the button to render. -->
